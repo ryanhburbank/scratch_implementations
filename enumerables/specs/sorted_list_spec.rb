@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative '../emumerable'
+require_relative '../enumerable'
 
 describe "SortedList" do
 	let(:list) { SortedList.new([5,4,1]) }

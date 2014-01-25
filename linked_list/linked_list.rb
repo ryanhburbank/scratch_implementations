@@ -13,6 +13,10 @@ class Entry
 		@next = nil
 		@data = data
 	end
+
+	def to_s
+		"@data=#{@data} @next={#{@next || 'nil'}}"
+	end
 end
 
 #next var is a pointer to the following entry in list
@@ -21,10 +25,11 @@ end
 #the list itself
 class List
 	attr_accessor :name #track list's name(if any)
-
-	def initialize
+	attr_reader :head, :tail
+	def initialize(name = nil)
 		@head = nil
 		@tail = nil
+		@name = name
 		#note head & tail are not exposed
 	end
 
@@ -87,6 +92,14 @@ class List
 		new_list = List.new
 		self.each {|entry| new_list.head_insert(Entry.new(entry.data)) }
 		return new_list
+	end
+
+	def to_s
+		if @name
+			"#{@name}: head= #{@head||'nil'}, tail= #{@tail||'nil'}"
+		else
+			"head= #{@head||'nil'}, tail= #{@tail||'nil'}"
+		end
 	end
 end
 
