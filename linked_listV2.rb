@@ -89,3 +89,21 @@ class List
 		return new_list
 	end
 end
+
+def bench(structure, iterations)
+	start = Time.now
+	yield 
+	finish = Time.now
+	puts "#{structure} took #{finish - start} to complete #{iterations} insertions"
+end
+
+array = Array.new
+bench("array",100000) {
+	100000.times { |i| array.insert(0,i) }
+}
+
+list = List.new
+bench("linked list", 100000) {
+	100000.times { |i| list.head_insert(Entry.new(i)) }
+}
+
