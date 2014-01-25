@@ -106,4 +106,3 @@ list = List.new
 bench("linked list", 100000) {
 	100000.times { |i| list.head_insert(Entry.new(i)) }
 }
-
