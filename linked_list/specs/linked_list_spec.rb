@@ -18,6 +18,35 @@ end
 describe "Linked List" do
 	let(:list) { List.new }
 
+	describe "#tail_insert" do
+		describe "when head is nil" do
+			before do
+				list.tail_insert(Entry.new(1))
+			end
+			
+			it "sets head to entry" do
+				list.head.data.must_equal(1)
+			end
+
+			it "sets tail to entry" do
+				list.tail.data.must_equal(1)
+			end
+		end
+
+		describe "when head is not nil" do
+			before do 
+				list.tail_insert(Entry.new(1))
+				list.tail_insert(Entry.new(2))
+			end
+			it "sets the previous tail's next node to entry" do
+				list.head.next.data.must_equal(2)
+			end
+
+			it "sets the tail to entry" do
+				list.tail.data.must_equal(2)
+			end
+		end
+	end
 	describe "#head_insert" do
 		before do 
 			list.head_insert(Entry.new(1))
