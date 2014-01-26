@@ -22,14 +22,33 @@ describe "Linked List" do
 		before do 
 			list.head_insert(Entry.new(1))
 		end
-		it "sets the head to the entry when the list is empty" do
-			list.head.data.must_equal(1)
-			list.head.next.must_equal(nil)
+		
+		describe "list is empty" do
+
+			it "sets the head to the entry" do
+				list.head.data.must_equal(1)
+				list.head.next.must_equal(nil)
+			end
+
+			it "sets the tail to the entry" do
+				list.tail.data.must_equal(1)
+				list.tail.next.must_equal(nil)
+			end
 		end
 
-		it "sets the tail to the entry when the list is empty" do
-			list.tail.data.must_equal(1)
-			list.tail.next.must_equal(nil)
+		describe "list is not empty" do
+			before do
+				list.head_insert(Entry.new(2))
+			end
+
+			it "sets the head to the entry" do
+				list.head.data.must_equal(2)
+			end
+
+			it "sets the previous head to the entry's reference node" do
+				list.head.next.data.must_equal(1)
+				list.head.next.next.must_equal(nil)
+			end
 		end
 	end
 end

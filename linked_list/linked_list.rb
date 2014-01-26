@@ -1,11 +1,4 @@
-#need functions to
-# 1: put entry at top of list
-# 2: put entry at bottom of list
-# 3: put remove entry from top of list
-# This will make manipulating the list significantly
-# easier
 
-#code for list entry
 class Entry
 	attr_accessor :next, :data
 
@@ -19,10 +12,7 @@ class Entry
 	end
 end
 
-#next var is a pointer to the following entry in list
-#data var holds data within each entry
 
-#the list itself
 class List
 	attr_accessor :name #track list's name(if any)
 	attr_reader :head, :tail
@@ -30,7 +20,6 @@ class List
 		@head = nil
 		@tail = nil
 		@name = name
-		#note head & tail are not exposed
 	end
 
 	def head_insert(entry) #puts entry on top of queue
@@ -41,7 +30,7 @@ class List
 			entry.next = @head
 			@head = entry
 		end
-		return self
+		self
 	end
 
 	def tail_insert(entry) #puts entry on bottom of queue
@@ -52,7 +41,28 @@ class List
 			@tail.next = entry
 			@tail = entry
 		end
-		return self
+		self
+	end
+
+	def remove_tail
+		return nil if @tail.nil?
+		output = nil
+		current_node = @head
+		if @head.next.nil?
+			@tail = nil
+			@head = nil
+			return current_node
+		end
+		node_before_tail_node = nil
+		until current_node.next.nil?
+			node_before_tail_node = current_node
+			current_node = current_node.next
+		end
+		@tail = node_before_tail_node
+		@tail.next = nil
+		output = current_node
+		current_node = nil
+		output
 	end
 
 	def remove_head #return and return head of list
@@ -76,7 +86,7 @@ class List
 		end
 
 		@head = tmp_head
-		return self
+		self
 	end
 	
 	def each
