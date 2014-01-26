@@ -28,11 +28,17 @@ describe "ScratchEnumerable" do
 end
 
 describe "ScratchEnumerator" do 
-		let(:list) { SortedList.new(1,4,5)}
+		let(:list) { SortedList.new([1,4,5])}
+
+		it "supports each" do
+			enumerator = list.each
+			test = 0
+			enumerator.each {|i| test += i }
+			test.must_equal(10)
+		end
 
 		it "supports next" do
-			skip
-			enum = @list.each
+			enum = list.each
 
 			enum.next.must_equal(1)
 			enum.next.must_equal(4)
@@ -41,9 +47,18 @@ describe "ScratchEnumerator" do
 			assert_raises(StopIteration) { enum.next }
 		end
 
+		it "supports rewind" do
+			enum = list.each
+			enum.next
+			enum.next
+			enum.next
+			assert_raises(StopIteration) { enum.next }
+			enum.rewind
+			enum.next.must_equal(1)
+		end
+
 		it "supports with_index" do
-			skip
-			enum = @list.map
+			enum = list.my_map
 			expected = ["0: 1","1: 4","2: 5"]
 
 			enum.with_index {|e,i| "#{i}: #{e}"}.must_equal(expected)
