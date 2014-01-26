@@ -93,3 +93,27 @@ describe "Linked List" do
 		end
 	end
 end
+
+
+array = Array.new
+list = List.new
+
+puts "-" * 75
+puts "Benchmark Test: Array.insert vs LinkedList.insert"
+puts "." * 75
+puts "." * 75
+
+bench("array",100000) {
+	100000.times { |i| array.insert(0,i) }
+}
+
+puts "-" * 75
+
+bench("linked list", 100000) {
+	100000.times { |i| list.head_insert(Entry.new(i)) }
+}
+
+puts "." * 75
+puts "." * 75
+puts "Benchmark Complete"
+puts "-" * 75
