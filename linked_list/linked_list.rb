@@ -113,10 +113,10 @@ class List
 	end
 end
 
-def bench(structure, iterations)
+def bench(structure, iterations, action)
 	start = Time.now
 	yield 
 	finish = Time.now
-	puts "#{structure.capitalize} took #{finish - start} seconds to complete #{iterations} insertions"
+	puts "#{structure.capitalize} took #{finish - start} seconds to complete #{iterations} #{action}"
 end
 
